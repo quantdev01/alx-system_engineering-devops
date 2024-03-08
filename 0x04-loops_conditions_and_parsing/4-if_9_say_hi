@@ -7,6 +7,7 @@ while [ $i -lt 11 ]
 do
 	if [ $i -eq 9 ]
 	then
+		echo "Best School"
 		echo "Hi"
 	else
 		echo "Best School"
