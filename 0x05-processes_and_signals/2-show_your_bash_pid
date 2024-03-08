@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Display where there is bash wor processes
+# shellcheck disable=SC2009
+
+ps -aux --forest | grep "bash"
