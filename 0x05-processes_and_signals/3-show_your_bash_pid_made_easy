@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Show your Bash PID madde easy
+
+pgrep -l bash
