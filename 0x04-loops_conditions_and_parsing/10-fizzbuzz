@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
+# This is priting fizzBuzz
 
 i=1
 
 while [ $i -lt 101 ]; do
-	if [[ $i%3 -eq 0 && $i%5 -eq 0 ]]; then
+	if [[ $((i%3)) -eq 0 && $((i%5)) -eq 0 ]]; then
 		echo "FizzBuzz"
-	elif [[ $i%3 -eq 0 ]]; then
+	elif [[ $((i%3)) -eq 0 ]]; then
 		echo "Fizz"
-	elif [[ $i%5 -eq 0 ]]; then
+	elif [[ $((i%5)) -eq 0 ]]; then
 		echo "Buzz"
 	else
 		echo $i
