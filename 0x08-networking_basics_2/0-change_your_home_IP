@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Change my ip and change env
+
+ifconfig lo 127.0.0.2
