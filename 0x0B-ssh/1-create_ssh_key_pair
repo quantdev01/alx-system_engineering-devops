@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Creating a new ssh key pair
+
+sudo ssh-keygen -t rsa -b 2048
