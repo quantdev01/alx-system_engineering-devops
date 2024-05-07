@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # client configuration file
 
-Host remote_host
+"""Host remote_host
 	Hostname <54.157.143.24>
 	User <ubuntu>
 	IdentityFile ~/.ssh/school
+	"""
