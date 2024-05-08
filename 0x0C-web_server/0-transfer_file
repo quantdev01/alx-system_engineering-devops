@@ -6,4 +6,4 @@ if [ "$#" -lt 4 ]; then
     exit 1
 fi
 
-scp $1 $3@$2:.$4
+scp -i $4 $1 $3@$2:
