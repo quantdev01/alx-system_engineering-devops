@@ -18,7 +18,7 @@ request_uri="/var/www/html/index.html"
 
 
 # Ensure nginx is listening on port 80 by default (should be the case unless modified)
-sudo sed -i "s/listen 80 default_server;/listen 80;/" /etc/nginx/sites-available/default
+sudo sed -i "s/listen 80 default_server;/" /etc/nginx/sites-available/default
 
 # Redirect to a new url
 
