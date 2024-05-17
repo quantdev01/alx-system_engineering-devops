@@ -22,4 +22,3 @@ sudo service nginx restart
 
 # Confirm nginx is serving the correct page
 curl http://localhost/
-
