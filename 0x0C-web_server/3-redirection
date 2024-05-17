@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
-# installing a nginx web server
+
+# Update the package list
+sudo apt-get update
 
 # Install nginx
-sudo apt-get update
 sudo apt-get install -y nginx
 
 # Create a simple HTML file that contains "Hello World!"
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Ensure nginx is listening on port 80 by default (should be the case unless modified)
-sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+# Add redirection to /redirect_me in the nginx default site configuration
+sudo sed -i '/location \/ {/a\    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }\n' /etc/nginx/sites-available/default
 
-# Redirect to a new URL
-sudo sed -i '/listen 80/a\        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4$request_uri;' /etc/nginx/sites-available/default
+# Restart nginx to apply the changes
+sudo systemctl restart nginx
 
+# Confirm nginx is serving the correct page and the redirection works
+curl -sI http://localhost/redirect_me/
 
-sudo service nginx restart
-
-# Confirm nginx is serving the correct page
-curl http://localhost/
