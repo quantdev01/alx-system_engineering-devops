@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # installing a nginx web server
 
 # sudo apt-get -y install nginx
@@ -15,13 +14,16 @@ sudo apt-get install -y nginx
 # Create a simple HTML file that contains "Hello World!"
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
+request_uri="/var/www/html/index.html"
+
+
 # Ensure nginx is listening on port 80 by default (should be the case unless modified)
-sudo sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
+sudo sed -i "s/listen 80 default_server;/listen 80;/" /etc/nginx/sites-available/default
 
 # Redirect to a new url
 
-sed -i '/listen 80/a\
-	return 301 http://https://www.youtube.com/watch?v=QH2-TGUlwu4$request_uri;' /etc/nginx/sites-available/default
+sed -i "/listen 80/a\
+	return 301 http://https://www.youtube.com/watch?v=QH2-TGUlwu4$request_uri;" /etc/nginx/sites-available/default
 
 # Restart nginx to apply the changes without using systemctl
 sudo service nginx restart
