@@ -9,8 +9,8 @@ sudo apt-get install -y nginx
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Add redirection to /redirect_me in the nginx default site configuration
-grep -qxF '    return https://www.youtube.com$request_uri;' /etc/nginx/nginx.conf || sudo sed -i '/listen 80;/a\    return https://www.youtube.com$request_uri;' /etc/nginx/nginx.conf
-# Restart nginx to apply the changes
+grep -qxF '    return https://www.youtube.com$request_uri;' /etc/nginx/sites-available/default || sudo sed -i '/listen 80;/a\    return https://www.youtube.com$request_uri;' /etc/nginx/sites-available/default
+# Restart nginx 
 sudo systemctl restart nginx
 
 # Confirm nginx is serving the correct page and the redirection works
