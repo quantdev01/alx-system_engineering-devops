@@ -1,18 +1,37 @@
 #!/usr/bin/env bash
 # Update the package list
+
 sudo apt-get update
 
 # Install nginx
 sudo apt-get install -y nginx
 
-# Create a simple HTML file that contains "Hello World!"
-echo "Hello World!" | sudo tee /var/www/html/index.html
+# Create a simple HTML file that contains the redirection message
+echo "<html><head><title>301 Moved Permanently</title></head><body><p>This page has moved <a href='https://www.youtube.com/watch?v=QH2-TGUlwu4'>here</a>.</p></body></html>" | sudo tee /var/www/html/redirect.html
 
-# Add redirection to /redirect_me in the nginx default site configuration
-grep -qxF '    return https://www.youtube.com$request_uri;' /etc/nginx/sites-available/default || sudo sed -i '/listen 80;/a\    return https://www.youtube.com$request_uri;' /etc/nginx/sites-available/default
-# Restart nginx 
+# Configure Nginx for redirection
+sudo bash -c 'cat > /etc/nginx/sites-available/redirect_me <<EOF
+server {
+    listen 80;
+    server_name localhost;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}
+EOF'
+
+# Create a symbolic link to enable the site
+sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+# Test Nginx configuration
+sudo nginx -t
+
+# Restart Nginx to apply changes
 sudo systemctl restart nginx
-
-# Confirm nginx is serving the correct page and the redirection works
-curl -sI http://localhost/redirect_me/
 
