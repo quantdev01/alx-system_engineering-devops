@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+sudo apt-get update
+sudo apt-get install ufw -y
+
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 8080/tcp
+
+sudo sed -i '/^*filter/i *nat\n:PREROUTING ACCEPT [0:0]\n-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80\nCOMMIT\n' /etc/ufw/before.rules
+
+sudo ufw enable
+sudo ufw status verbose
