@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Forwarding the 8080 tcp to 80
 
 sudo apt-get update
 sudo apt-get install ufw -y
