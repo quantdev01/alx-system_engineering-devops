@@ -1,0 +1,38 @@
+# mysql files configs changes
+server-id       = 2
+log_bin                 = /var/log/mysql/mysql-bin.log
+binlog_do_db            = tyrell_corp
+relay-log               = /var/log/mysql/mysql-relay-bin.log
+
+# then restart mysql
+
+sudo systemctl restart mysql
+
+sudo mysql
+
+# changing the replication source
+
+# NEW Version of mysql
+
+# CHANGE REPLICATION SOURCE TO
+# SOURCE_HOST='54.157.143.24',
+# SOURCE_USER='replica_user',
+# SOURCE_PASSWORD='password',
+# SOURCE_LOG_FILE='mysql-bin.000001',
+# SOURCE_LOG_POS=571;
+
+# START REPLICA;
+# SHOW REPLICA STATUS\G;
+
+# the one used
+
+CHANGE MASTER TO
+MASTER_HOST='54.157.143.24',
+MASTER_USER='replica_user',
+MASTER_PASSWORD='password',
+MASTER_LOG_FILE='mysql-bin.000001',
+MASTER_LOG_POS=571;
+
+START SLAVE;
+
+SHOW SLAVE STATUS\G;
