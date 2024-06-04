@@ -4,7 +4,6 @@
 
 from json import dump
 import requests
-from sys import argv
 
 if __name__ == "__main__":
 
@@ -23,17 +22,18 @@ if __name__ == "__main__":
         r = r.json()
         return r
 
-    user = make_request('users', ('id', argv[1]))[0]
-    tasks = make_request('todos', ('userId', argv[1]))
+    export = {}
 
-    # format before exporting
-    user_id = user['id']
-    export = {user_id: []}
-    for task in tasks:
-        export[user_id].append({'task': task['title'],
-                                'completed': task['completed'],
-                                'username': user['username']})
+    users = make_request('users')
+    for user in users:
+        user_id = user['id']
+        export.update({user_id: []})
+        tasks_by_user = make_request('todos', ('userId', str(user_id)))
+        for task in tasks_by_user:
+            export[user_id].append({'username': user['username'],
+                                    'task': task['title'],
+                                    'completed': task['completed']})
 
-    filename = argv[1] + '.json'
+    filename = 'todo_all_employees.json'
     with open(filename, mode='w') as f:
         dump(export, f)
