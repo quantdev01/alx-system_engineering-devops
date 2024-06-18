@@ -23,13 +23,16 @@ def top_ten(subreddit):
             url, headers=headers, params=limit, allow_redirects=False
             )
 
-    # Catching for any error and return None
-    try:
-        # Gettin the data
-        data = response.json()
+    if response.status_code == 200:
+        # Catching for any error and return None
+        try:
+            # Gettin the data
+            data = response.json()
 
-        # for loop to print 10 titles article
-        for i in range(10):
-            print(data['data']['children'][i]['data']['title'])
-    except Exception:
+            # for loop to print 10 titles article
+            for i in range(10):
+                print(data['data']['children'][i]['data']['title'])
+        except Exception:
+            print("None")
+    else:
         print("None")
