@@ -6,13 +6,27 @@ import requests
 
 
 def top_ten(subreddit):
+    """
+    Top ten articles priting
+    """
+    # we are retriving the url
     url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+
+    # Defines header value
     headers = {'User-Agent': 'MyRedditBot/1.0'}
+
+    # Setting the limit request
     limit = {'limit': 10}
+
+    # Make the get request to the Reddit API
     response = requests.get(url, headers=headers, params=limit)
 
+    # Catching for any error and return None
     try:
+        # Gettin the data
         data = response.json()
+
+        # for loop to print 10 titles article
         for i in range(10):
             print(data['data']['children'][i]['data']['title'])
     except Exception:

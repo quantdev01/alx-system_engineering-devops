@@ -10,7 +10,7 @@ def recurse(subreddit, hot_list=[], after=''):
     """
     Recursive function
     """
-     # Define the base URL for the Reddit API
+    # Define the base URL for the Reddit API
     url = f'https://www.reddit.com/r/{subreddit}/hot.json'
 
     # Define the headers for the request
@@ -20,7 +20,9 @@ def recurse(subreddit, hot_list=[], after=''):
     params = {'after': after}
 
     # Make the GET request to the Reddit API
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(
+            url, headers=headers, params=params, allow_redirects=False
+            )
 
     # Check if the request was successful
     if response.status_code != 200:
