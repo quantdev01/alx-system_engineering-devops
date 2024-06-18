@@ -16,7 +16,7 @@ def number_of_subscribers(subreddit):
     headers = {'User-Agent': 'MyRedditBot/1.0'}
 
     # Getting the response
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, allow_redirects=False)
     try:
         data = response.json()
         subscribers = data['data']['subscribers']
