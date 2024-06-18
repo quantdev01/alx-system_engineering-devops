@@ -11,7 +11,7 @@ def recurse(subreddit, hot_list=[], after=''):
     Recursive function
     """
     # Define the base URL for the Reddit API
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
 
     # Define the headers for the request
     headers = {'User-Agent': 'MyRedditBot/1.0'}
