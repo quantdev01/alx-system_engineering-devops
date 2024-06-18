@@ -29,14 +29,9 @@ def top_ten(subreddit):
             # Gettin the data
             data = response.json()
 
-            host_posts = data['data']['children']
-
-            for post in host_posts:
-                print(post['data']['title'])
-
             # for loop to print 10 titles article
-            # for i in range(10):
-            #    print(data['data']['children'][i]['data']['title'])
+            for i in range(10):
+                print(data['data']['children'][i]['data']['title'])
         except requests.RequestException:
             print("None")
     else:
