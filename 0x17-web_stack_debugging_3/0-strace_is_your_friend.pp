@@ -11,9 +11,9 @@ package { 'php5':
 }
 
 service { 'apache2':
-  ensure     => running,
-  enable     => true,
-  subscribe  => Package['apache2'],
+  ensure    => running,
+  enable    => true,
+  subscribe => Package['apache2'],
 }
 
 file { '/var/www/html/index.php':
